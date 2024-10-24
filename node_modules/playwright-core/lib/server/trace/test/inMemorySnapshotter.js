@@ -4,7 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.InMemorySnapshotter = void 0;
-var _snapshotStorage = require("../../../../../trace-viewer/src/snapshotStorage");
+var _snapshotStorage = require("../../../../../trace-viewer/src/sw/snapshotStorage");
 var _snapshotter = require("../recorder/snapshotter");
 var _harTracer = require("../../har/harTracer");
 var _utils = require("../../../utils");

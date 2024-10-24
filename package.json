@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     
-    "test:wp": "npx playwright test wpTest.spec.ts",
-    "test:wpS": "npx playwright test wpTest.spec.ts --project=webkit"
+    "test:wp": "npx playwright test rutskyi.free.nef.spec.ts",
+    "test:wpS": "npx playwright test rutskyi.free.nef.spec.ts --project=webkit"
   },
   "keywords": [],
   "author": "",

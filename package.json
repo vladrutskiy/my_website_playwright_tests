@@ -1,0 +1,20 @@
+{
+  "name": "wp-quick-test-playwright_by_vlad",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    
+    "test:wp": "npx playwright test wpTest.spec.ts",
+    "test:wpS": "npx playwright test wpTest.spec.ts --project=webkit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@applitools/eyes-playwright": "^1.14.0",
+    "@playwright/test": "^1.45.2",
+    "@types/node": "^20.8.8",
+    "dotenv": "^16.0.3"
+  }
+}

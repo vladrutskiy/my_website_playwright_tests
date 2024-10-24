@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://127.0.0.1:5500/index.html');
+  await page.goto('./');
   await expect(page.getByRole('heading', { name: 'PROJECTS' })).toBeVisible();
   await expect(page.getByText('Several words about projects')).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Upward Aviation Services' })).toBeVisible();

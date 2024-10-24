@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('http://127.0.0.1:5500/index.html');
+  await page.goto('./');
   await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible();
   await page.locator('#home').click();
   await expect(page.locator('#home')).toBeVisible();

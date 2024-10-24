@@ -8,6 +8,8 @@ test.describe('Basic Navigation: website is opened', () => {
     // Go to the homepage
     await page.goto('./');
 
+    
+
   });
 });
 

@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import baseEnvUrl from './utils/environmentBaseUrl';
 
+
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -31,6 +32,10 @@ export default defineConfig({
   
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
+    // this setting will show or hide the browser window
+    headless: true,
+
+    ignoreHTTPSErrors: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
         
     baseURL: 'https://rutskyi.free.nf',

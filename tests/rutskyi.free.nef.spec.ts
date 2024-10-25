@@ -43,7 +43,7 @@ test.describe('we are navigating to the home page', () => {
 
   test('Check the color of Download resume button before and after hover', async ({ page }) => {
        
-   // Scroll down until the "Download resume" button is visible
+    // Scroll down until the "Download resume" button is visible
   while (!(await page.getByRole('link', { name: 'Download resume' }).isVisible())) {
     await page.evaluate(() => window.scrollBy(0, 1500));  // Scroll down by 1500 pixels
     await page.waitForTimeout(500);  // Wait for a short time after scrolling
@@ -57,13 +57,13 @@ test.describe('we are navigating to the home page', () => {
   // Optionally disable animations for testing
   await page.evaluate(() => {
     document.querySelectorAll('*').forEach(el => {
-      el.style.transition = 'none';
+      (el as HTMLElement).style.transition = 'none';  // Cast to HTMLElement to access `style`
     });
   });
 
   // Check the button's color before hover
   const buttonColorBeforeHover = await downloadButton.evaluate((element) => {
-    return window.getComputedStyle(element).getPropertyValue('background-color');
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
   });
   console.log('Button color before hover:', buttonColorBeforeHover); // Log or assert
 
@@ -72,7 +72,7 @@ test.describe('we are navigating to the home page', () => {
 
   // Check the button's color after hover
   const buttonColorAfterHover = await downloadButton.evaluate((element) => {
-    return window.getComputedStyle(element).getPropertyValue('background-color');
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
   });
   console.log('Button color after hover:', buttonColorAfterHover); // Log or assert
 

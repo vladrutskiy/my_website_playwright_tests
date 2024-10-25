@@ -38,8 +38,8 @@ export default defineConfig({
     ignoreHTTPSErrors: true,
     /* Base URL to use in actions like `await page.goto('/')`. */
         
-    // baseURL: 'https://rutskyi.free.nf',
-    baseURL: 'http://127.0.0.1:5500/index.html',
+    baseURL: 'https://rutskyi.free.nf',
+    // baseURL: 'http://127.0.0.1:5500/index.html',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',

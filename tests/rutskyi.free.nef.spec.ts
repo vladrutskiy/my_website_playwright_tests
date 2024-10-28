@@ -4,8 +4,10 @@ import { only } from 'node:test';
 import { json } from 'stream/consumers';
 
 test.describe('we are navigating to the home page', () => {
-  test.beforeEach(async ({page}) => {
-    await page.goto('');
+    test.beforeEach(async ({page}) => {
+      
+    await page.goto('', { waitUntil: 'networkidle' });
+    
   })
 
   test('Nav menu is present', async ({ page }) => {
@@ -213,7 +215,7 @@ test.describe('we are navigating to the home page', () => {
   });
 
 
- test('Check that the Download resume button works and opens correct window', async ({ page }) => {
+  test('Check that the Download resume button works and opens correct window', async ({ page }) => {
 
     // Ensure the link is visible
   await expect(page.getByRole('link', { name: 'Download resume' })).toBeVisible();

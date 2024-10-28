@@ -12,6 +12,138 @@ test.describe('we are navigating to the home page', () => {
     await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible();     
   });
 
+  test('Nav menu buttons change color after hover: About', async ({ page }) => {
+    await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible(); 
+    
+    const aboutLink = page.getByRole('link', { name: 'About' });
+
+  // Ensure the button-link is visible and stable before proceeding
+  await aboutLink.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Check the button-links's color before hover
+  const buttonColorBeforeHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color before hover:', buttonColorBeforeHover); // Log or assert
+
+  // Hover over the button with the force option
+  await aboutLink.hover({ force: true });
+
+  // Check the button's color after hover
+  const buttonColorAfterHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color after hover:', buttonColorAfterHover); // Log or assert
+
+  // Example of asserting if the color changes
+  expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
+
+
+
+
+
+
+  });
+
+  test('Nav menu buttons change color after hover: Projects', async ({ page }) => {
+    await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible(); 
+    
+    const aboutLink = page.getByRole('link', { name: 'Projects' });
+
+  // Ensure the button-link is visible and stable before proceeding
+  await aboutLink.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Check the button-links's color before hover
+  const buttonColorBeforeHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color before hover:', buttonColorBeforeHover); // Log or assert
+
+  // Hover over the button with the force option
+  await aboutLink.hover({ force: true });
+
+  // Check the button's color after hover
+  const buttonColorAfterHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color after hover:', buttonColorAfterHover); // Log or assert
+
+  // Example of asserting if the color changes
+  expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
+
+
+
+
+
+
+  });
+
+  test('Nav menu buttons change color after hover: Certificates', async ({ page }) => {
+    await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible(); 
+    
+    const aboutLink = page.getByRole('link', { name: 'Certificates' });
+
+  // Ensure the button-link is visible and stable before proceeding
+  await aboutLink.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Check the button-links's color before hover
+  const buttonColorBeforeHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color before hover:', buttonColorBeforeHover); // Log or assert
+
+  // Hover over the button with the force option
+  await aboutLink.hover({ force: true });
+
+  // Check the button's color after hover
+  const buttonColorAfterHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color after hover:', buttonColorAfterHover); // Log or assert
+
+  // Example of asserting if the color changes
+  expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
+
+
+
+
+
+
+  });
+
+    test('Nav menu buttons change color after hover: Contact', async ({ page }) => {
+    await expect(page.getByText('HOME ABOUT PROJECTS')).toBeVisible(); 
+    
+    const aboutLink = page.getByRole('link', { name: 'Contact' });
+
+  // Ensure the button-link is visible and stable before proceeding
+  await aboutLink.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Check the button-links's color before hover
+  const buttonColorBeforeHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color before hover:', buttonColorBeforeHover); // Log or assert
+
+  // Hover over the button with the force option
+  await aboutLink.hover({ force: true });
+
+  // Check the button's color after hover
+  const buttonColorAfterHover = await aboutLink.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');  // Cast to HTMLElement
+  });
+  console.log('Button color after hover:', buttonColorAfterHover); // Log or assert
+
+  // Example of asserting if the color changes
+  expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
+
+
+
+
+
+
+  });
+
 
   test('home and vlad rutskiy are visible', async ({ page }) => {
   await expect(page.locator('#home')).toBeVisible();
@@ -80,6 +212,25 @@ test.describe('we are navigating to the home page', () => {
   expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
   });
 
+
+ test('Check that the Download resume button works and opens correct window', async ({ page }) => {
+
+    // Ensure the link is visible
+  await expect(page.getByRole('link', { name: 'Download resume' })).toBeVisible();
+
+  // Wait for any animations to settle
+ await page.waitForTimeout(500); // Adjust the timeout if necessary
+
+  // Wait for the popup to open
+  const [popup] = await Promise.all([
+    page.waitForEvent('popup'), // Waits for the popup window
+    page.getByRole('link', { name: 'Download resume' }).click({ force: true }), // Triggers the popup
+  ]);
+
+  // Wait for the popup content to load and verify the text
+  await expect(popup.getByText('Vlad Rutskiy New Resume parent')).toBeVisible();
+
+});
   
   
 

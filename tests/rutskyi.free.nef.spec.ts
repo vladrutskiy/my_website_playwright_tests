@@ -161,10 +161,7 @@ test.describe('we are navigating to the home page', () => {
     await expect(page.getByRole('img', { name: 'Photo of Me' })).toBeVisible();   
   });
 
-  // test('Download resume button', async ({ page }) => {
-  //   await expect(page.getByRole('link', { name: 'Download resume' })).toBeVisible();     
-  // });
-
+ 
   test('Scroll down till Download resume button', async ({ page }) => {
         while (!(await page.getByRole('link', { name: 'Download resume' }).isVisible())) {
       await page.evaluate(() => window.scrollBy(0, 1500));  // Scroll down by 500 pixels
@@ -234,7 +231,150 @@ test.describe('we are navigating to the home page', () => {
 
 });
   
+test('Scroll down till Projects section ', async ({ page }) => {
+  while (!(await page.locator('#projects').isVisible())) {
+    await page.evaluate(() => window.scrollBy(0, 1500));  // Scroll down by 1500 pixels
+    await page.waitForTimeout(500);  // Short wait after scrolling
+  }
   
+// Assert that the element is now visible
+await expect(page.locator('#projects' )).toBeVisible();
+await expect(page.getByText('Several words about projects')).toBeVisible();
+}); 
+
+test('Scroll down till First visible project (Upward) checking the texts', async ({ page }) => {
+  while (!(await page.getByRole('link', { name: 'Upward Aviation Services' }).isVisible())) {
+    await page.evaluate(() => window.scrollBy(0, 1500));  // Scroll down by 1500 pixels
+    await page.waitForTimeout(500);  // Short wait after scrolling
+  }
+
+  
+// Assert that the element is now visible
+// await expect(page.getByText('This project started as a website renewal.')).toBeVisible();
+await expect(page.locator('#projects')).toContainText('This project started as a website renewal. But we ended up with almost the whole rebranding process. Upward Aviation Services is a Calgary-based company that provides different aircraft-related services, from training to import assistance. At first, we created a website. The next step was creating a logo, which was warmly accepted by the company owners. After that, we created mockups for printing the company logo on clothes. The project is ongoing. This project is developed with the assistance of Natalia Lozovska.');
+}); 
+
+test('Check the color of Show more button before and after hover', async ({ page }) => {
+  // Scroll down until the "Load more" button is visible
+  while (!(await page.getByRole('button', { name: 'Load more' }).first().isVisible())) {
+    await page.evaluate(() => window.scrollBy(0, 1500)); // Scroll down by 1500 pixels
+    await page.waitForTimeout(500); // Short wait after scrolling
+    await page.evaluate(() => {
+      document.querySelectorAll('*').forEach((el) => {
+        (el as HTMLElement).style.transition = 'none';
+      });
+    });
+  }
+
+  const loadMoreButton = page.getByRole('button', { name: 'Load more' }).first();
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Ensure the button is visible and stable before proceeding
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Disable animations for testing
+  await page.evaluate(() => {
+    document.querySelectorAll('*').forEach(el => (el as HTMLElement).style.transition = 'none');
+  });
+
+  // Check the button's color before hover
+  const buttonColorBeforeHover = await loadMoreButton.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');
+  });
+  console.log('Button color before hover:', buttonColorBeforeHover);
+
+  // Hover over the button
+  await page.waitForTimeout(500); // Short delay for stability
+  await loadMoreButton.hover({ force: true });
+
+
+  // Check the button's color after hover
+  const buttonColorAfterHover = await loadMoreButton.evaluate((element) => {
+    return window.getComputedStyle(element as HTMLElement).getPropertyValue('background-color');
+  });
+  console.log('Button color after hover:', buttonColorAfterHover);
+
+  // Assert if the color changes
+  expect(buttonColorBeforeHover).not.toBe(buttonColorAfterHover);
+});
+
+test('Check the click on Show more button and list visibility ', async ({ page }) => {
+  // Scroll down until the "Load more" button is visible
+  while (!(await page.getByRole('button', { name: 'Load more' }).first().isVisible())) {
+    await page.evaluate(() => window.scrollBy(0, 1500)); // Scroll down by 1500 pixels
+    await page.waitForTimeout(500); // Short wait after scrolling
+    await page.evaluate(() => {
+      document.querySelectorAll('*').forEach((el) => {
+        (el as HTMLElement).style.transition = 'none';
+      });
+    });
+  }
+
+  const loadMoreButton = page.getByRole('button', { name: 'Load more' }).first();
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Ensure the button is visible and stable before proceeding
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Disable animations for testing
+  await page.evaluate(() => {
+    document.querySelectorAll('*').forEach(el => (el as HTMLElement).style.transition = 'none');
+  });
+
+  
+  // Hover over the button
+  await page.waitForTimeout(500); // Short delay for stability
+  await loadMoreButton.hover({ force: true });
+  await page.getByRole('button', { name: 'Load more' }).first().click({ force: true });
+  await expect(page.getByRole('list')).toBeVisible();
+  await expect(page.getByRole('list')).toContainText('I mastered my knowledge about WordPress, building websites, launching them, and maintaining them on this platform. In addition, I learned how to work with different plugins, and how to avoid some WordPress website-building mistakes. Added reCaptcha spam protection. Added CloudFlare protection.');
+  
+});
+
+test('Check the click on Show more button and click on Show less button ', async ({ page }) => {
+  // Scroll down until the "Load more" button is visible
+  while (!(await page.getByRole('button', { name: 'Load more' }).first().isVisible())) {
+    await page.evaluate(() => window.scrollBy(0, 1500)); // Scroll down by 1500 pixels
+    await page.waitForTimeout(500); // Short wait after scrolling
+    await page.evaluate(() => {
+      document.querySelectorAll('*').forEach((el) => {
+        (el as HTMLElement).style.transition = 'none';
+      });
+    });
+  }
+
+  const loadMoreButton = page.getByRole('button', { name: 'Load more' }).first();
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Ensure the button is visible and stable before proceeding
+  await loadMoreButton.waitFor({ state: 'visible', timeout: 10000 });
+
+  // Disable animations for testing
+  await page.evaluate(() => {
+    document.querySelectorAll('*').forEach(el => (el as HTMLElement).style.transition = 'none');
+  });
+
+  
+  // Hover over the button
+  await page.waitForTimeout(500); // Short delay for stability
+  await loadMoreButton.hover({ force: true });
+  await page.getByRole('button', { name: 'Load more' }).first().click({ force: true });
+
+  await page.waitForTimeout(500); // Short delay for stability
+  await expect(page.getByRole('button', { name: 'Load less' })).toBeVisible();
+  await page.getByRole('button', { name: 'Load less' }).click({ force: true });
+
+  await page.waitForTimeout(500);
+  await loadMoreButton.hover({ force: true });
+ 
+  await expect(page.getByRole('list')).toBeHidden();
+
+});
+
+
+
+
+
 
 
 

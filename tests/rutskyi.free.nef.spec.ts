@@ -1,7 +1,7 @@
 import { test, expect  } from '@playwright/test';
 import assert from 'assert';
 import { only } from 'node:test';
-import { json } from 'stream/consumers';
+// import { json } from 'stream/consumers';
 
 test.describe('Navigation menu UI tests', () => {
     test.beforeEach(async ({page}) => {

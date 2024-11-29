@@ -2,7 +2,7 @@ pipeline {
   agent { 
     docker { 
       image 'mcr.microsoft.com/playwright:v1.48.1-focal'
-      args ' -u root'
+    //   args ' -u root'
     } 
   }
   stages {
